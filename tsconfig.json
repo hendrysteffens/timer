@@ -1,0 +1,7 @@
+{
+  "url" : "https://www62.senior.com.br:8443/gestaoponto-backend/api/",
+  "username" : "hendry.steffens",
+  "password" : "******",
+  "portalPassword" : "*****",
+  "soap" : "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://ws.consultaponto.senior.com/\"><soapenv:Header/><soapenv:Body><ws:consultaPonto><login><username>$user</username><password>$password</password></login><startDate><day>$day</day><month>$month</month><year>$year</year></startDate><endDate><day>$day</day><month>$month</month><year>$year</year></endDate></ws:consultaPonto></soapenv:Body></soapenv:Envelope>"
+}
