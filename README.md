@@ -21,13 +21,13 @@ Aplicativo de linha de comando para consulta dos apontamentos de horas.
 #### Today
 
 Nele retorna algumas informações do ponto no dia exemplo:
-`08:56 /n
-11:23  </br>
-13:01
-19:20
-Tempo trabalhado:08:46
-Você deve sair: 9:00PM
-Faltam : 00:00 para você sair.`
+`08:56`</br>
+`11:23`</br>  
+`13:01`</br>
+`19:20`</br>
+`Tempo trabalhado:08:46`</br>
+`Você deve sair: 9:00PM`</br>
+`Faltam : 00:00 para você sair.`</br>
 
 #### Yesterday
 
