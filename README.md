@@ -21,8 +21,8 @@ Aplicativo de linha de comando para consulta dos apontamentos de horas.
 #### Today
 
 Nele retorna algumas informações do ponto no dia exemplo:
-`08:56
-11:23
+`08:56 /n
+11:23  </br>
 13:01
 19:20
 Tempo trabalhado:08:46
