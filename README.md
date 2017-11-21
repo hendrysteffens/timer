@@ -20,7 +20,7 @@ Aplicativo de linha de comando para consulta dos apontamentos de horas.
 
 #### Today
 
-Nele retorna algumas informações do ponto no dia exemplo:
+Nele retorna algumas informações do ponto no dia exemplo: </br>
 `08:56`</br>
 `11:23`</br>  
 `13:01`</br>
@@ -32,6 +32,8 @@ Nele retorna algumas informações do ponto no dia exemplo:
 #### Yesterday
 
 Retorna as mesmas informações do today mas referente a data anterior.
+
+**OBS:** Por padrão se não colocar nenhum comando, ele irá usar o **TODAY**
 
  <i class="icon-upload">Próximas implementações (Roadmap)
 -------------
