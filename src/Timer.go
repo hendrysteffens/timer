@@ -1,12 +1,11 @@
-package main
-
+package src
 
 import (
 	"fmt"
 	"os"
 	"encoding/json"
 	"time"
-	"timer/util"
+	"util"
 )
 
 func main() {
@@ -19,13 +18,13 @@ func main() {
 		case "today" : informationOfDay(time.Now().Local())
 		case "yesterday" : informationOfDay(time.Now().Local().AddDate(0, 0, -1))
 		case "week" : informationOfWeek()
+		case "add" : informationOfWeek()
 
 		}
 
-	}else {
+	} else {
 		informationOfDay(time.Now().Local())
 	}
-
 }
 
 func informationOfWeek() {
@@ -55,9 +54,7 @@ func informationOfDay(date time.Time) {
 	returnXml := util.GetDateTimesFromXml(util.GetSoapResponseFromSonata(date))
 
 	for _, t := range returnXml.Times {
-
 		fmt.Println(fmt.Sprintf("%02d:%02d", t.Hour, t.Minute))
-
 	}
 
 	fmt.Print("Tempo trabalhado:")
@@ -85,7 +82,6 @@ func calculateHowMuchTimeToLeave(timeWorked time.Time)(timeToLeave time.Time, ho
 
 func timeToleave(timeWorked time.Time) time.Time {
 	timeToLeave := time.Now().Local().Add(time.Hour * time.Duration(timeWorked.Hour()) +
-
 		time.Minute * time.Duration(timeWorked.Minute()))
 	return timeToLeave
 }
