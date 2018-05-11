@@ -2,7 +2,7 @@
 ===================
 
 
-Aplicativo de linha de comando para consulta dos apontamentos de horas. 
+Aplicativo de linha de comando para consulta das marcações de horas. 
 
 ----------
 
