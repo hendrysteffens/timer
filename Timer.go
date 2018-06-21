@@ -1,11 +1,11 @@
-package src
+package main
 
 import (
 	"fmt"
 	"os"
 	"encoding/json"
 	"time"
-	"util"
+	"timer/util"
 )
 
 func main() {
