@@ -1,18 +1,18 @@
 package util
 
 import (
-	"net/http"
 	"bytes"
-	"os"
-	"path/filepath"
+	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
-	"fmt"
-	"time"
-	"strings"
-	"strconv"
-	"crypto/tls"
 	"encoding/xml"
+	"fmt"
+	"net/http"
+	"os"
+	"path/filepath"
+	"strconv"
+	"strings"
+	"time"
 )
 
 var FILE = "tsconfig.json"
@@ -21,7 +21,7 @@ func DoGet(endpoint string) []byte {
 
 	client := &http.Client{}
 
-	request, error := http.NewRequest("GET", endpoint,nil)
+	request, error := http.NewRequest("GET", endpoint, nil)
 
 	request.Header.Add("assertion", GenerateToken())
 
@@ -40,8 +40,6 @@ func DoGet(endpoint string) []byte {
 	return buffer.Bytes()
 
 }
-
-
 
 func LoadConfiguration() Config {
 
@@ -69,15 +67,13 @@ func LoadConfiguration() Config {
 
 }
 
+func GenerateToken() string {
 
-
-func GenerateToken() string{
-
-	base64Text := base64.StdEncoding.EncodeToString([]byte(LoadConfiguration().Username+":"+LoadConfiguration().Password))
+	base64Text := base64.StdEncoding.EncodeToString([]byte(LoadConfiguration().Username + ":" + LoadConfiguration().Password))
 
 	client := &http.Client{}
 
-	request, error := http.NewRequest("POST", LoadConfiguration().Url + "senior/auth?gestor=S",nil)
+	request, error := http.NewRequest("POST", LoadConfiguration().Url+"senior/auth?gestor=S", nil)
 
 	if error != nil {
 
@@ -85,7 +81,7 @@ func GenerateToken() string{
 
 	}
 
-	request.Header.Add("Authorization", "Basic " + base64Text)
+	request.Header.Add("Authorization", "Basic "+base64Text)
 
 	response, error := client.Do(request)
 
@@ -107,13 +103,13 @@ func GetSoapResponseFromSonata(date time.Time) []byte {
 	soap = strings.Replace(soap, "$month", strconv.Itoa(int(date.Month())), 2)
 	soap = strings.Replace(soap, "$year", strconv.Itoa(date.Year()), 2)
 	soap = strings.Replace(soap, "$user", LoadConfiguration().Username, 1)
-	soap = strings.Replace (soap, "$password", LoadConfiguration().PortalPassword, 1)
+	soap = strings.Replace(soap, "$password", LoadConfiguration().PortalPassword, 1)
 
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 	}
-	client := &http.Client{Transport:tr}
-	request, error := http.NewRequest("POST", "https://sonata:1818/ConsultaPontoWS/ConsultaPonto",strings.NewReader(soap))
+	client := &http.Client{Transport: tr}
+	request, error := http.NewRequest("POST", "https://sonata:1818/ConsultaPontoWS/ConsultaPonto", strings.NewReader(soap))
 	response, error := client.Do(request)
 	if error != nil {
 		println(error)
@@ -122,7 +118,7 @@ func GetSoapResponseFromSonata(date time.Time) []byte {
 	if response != nil {
 		buffer.ReadFrom(response.Body)
 	}
-	return buffer.Bytes();
+	return buffer.Bytes()
 }
 
 func GetDateTimesFromXml(sonataXml []byte) Return {
@@ -138,7 +134,6 @@ func GetDateTimesFromXml(sonataXml []byte) Return {
 	}
 
 	return r
-
 }
 func (t Time) String() string {
 
@@ -146,7 +141,7 @@ func (t Time) String() string {
 
 }
 
-func (time* Time) ToString() string {
+func (time *Time) ToString() string {
 	hour := strconv.Itoa(time.Hour)
 	minute := strconv.Itoa(time.Minute)
 	if time.Hour < 10 {
@@ -158,22 +153,21 @@ func (time* Time) ToString() string {
 	return hour + ":" + minute
 }
 
-
 type Return struct {
-	Times []Time `xml:"Body>consultaPontoResponse>return>clock>time"`
-	WorkedTime Time `xml:"Body>consultaPontoResponse>return>workedTime"`
+	Times      []Time `xml:"Body>consultaPontoResponse>return>clock>time"`
+	WorkedTime Time   `xml:"Body>consultaPontoResponse>return>workedTime"`
 }
 
 type Config struct {
-	Url      string `json:"url"`
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Url            string `json:"url"`
+	Username       string `json:"username"`
+	Password       string `json:"password"`
 	PortalPassword string `json:"portalPassword"`
-	SoapEnv string `json:"soap"`
+	SoapEnv        string `json:"soap"`
 }
 
 type Token struct {
-	Token      string `json:"token"`
+	Token string `json:"token"`
 }
 
 type Time struct {
